@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat:ital@1&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+         *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box ;
+        }
+
+        main
+        {
+            min-height: 100vh;
+            background: linear-gradient(to right bottom,hsl(180, 100%, 82%), #CCF3EE);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main_block
+        {
+            min-height: 60vh;
+            width: 40%;
+            border-radius: 32px;
+            background: linear-gradient(to bottom right,rgba(196,221,255,0.4),rgba(127,181,255,0.7));
+            z-index: 2;
+            backdrop-filter: blur(2rem);
+            display: flex;
+            flex-direction: column;
+        }
+        h1
+        {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            color: #0AA1DD;
+            font-size: 3rem;
+        }
+        .from
+        {
+            
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            height: max-content;
+            width: max-content;
+        }
+
+        .btn {
+            background: #0AA1DD;
+            background-image: -webkit-linear-gradient(top, #0AA1DD, #0AA1DD);
+            background-image: -moz-linear-gradient(top, #0AA1DD, #0AA1DD);
+            background-image: -ms-linear-gradient(top, #0AA1DD, #0AA1DD);
+            background-image: -o-linear-gradient(top, #0AA1DD, #0AA1DD);
+            background-image: linear-gradient(to bottom, #0AA1DD, #0AA1DD);
+            -webkit-border-radius: 38;
+            -moz-border-radius: 38;
+            border-radius: 38px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 27px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+            align-self: center;
+            position: relative;
+            left: 35%;
+            bottom: 20px;
+        }
+        
+        .btn:hover {
+            background: #6fbbeb;
+            background-image: -webkit-linear-gradient(top, #6fbbeb, #055e99);
+            background-image: -moz-linear-gradient(top, #6fbbeb, #055e99);
+            background-image: -ms-linear-gradient(top, #6fbbeb, #055e99);
+            background-image: -o-linear-gradient(top, #6fbbeb, #055e99);
+            background-image: linear-gradient(to bottom, #6fbbeb, #055e99);
+            text-decoration: none;
+        }
+
+        table
+        {
+            font-family: 'Merriweather', serif;
+            text-align: center;
+        }
+
+        input
+        {
+            border-radius: 32px;
+            height: 30px;
+            width: 100px;
+            text-align: center;
+        }
+        input[type=number]:disabled 
+        {
+            background-color: #ffffff;
+        }
+
+    </style>
+    <script>
+        var panadol=0;
+        var disprine=0;
+        var flygel=0;
+        var total=0;
+        var grandtotal=0;
+        var tax=0;
+        function medicine(values)
+        {
+            if(values==1)
+            {
+                total=total-panadol;
+                panadol=0;
+                panadol=document.getElementById("panadol").value;
+                panadol=parseInt(panadol);
+                panadol=(10*panadol);
+                document.getElementById("sum_panadol").value=panadol;
+                total=total+panadol;
+            }
+            else if(values==2)
+            {
+                total=total-disprine;
+                disprine=0;
+                disprine=document.getElementById("disprine").value;
+                disprine=parseInt(disprine);
+                disprine=(15*disprine);
+                document.getElementById("sum_disprine").value=disprine;
+                total=total+disprine;
+            }
+            if(values==3)
+            {
+                total=total-flygel;
+                flygel=0;
+                flygel=document.getElementById("flygel").value;
+                flygel=parseInt(flygel);
+                flygel=(30*flygel);
+                document.getElementById("sum_flygel").value=flygel;
+                total=total+flygel;
+            }
+            document.getElementById("total").value=total;
+            tax=(total/100)*15;
+            document.getElementById("gst").value=tax;
+        }
+        function grand_total()
+        {
+                grandtotal=total+tax;
+                document.getElementById("gd").value=grandtotal;
+        }
+    </script>
+    <title>Medical Bill</title>
+</head>
+<body>
+    <main class="mainn">
+        <div class="main_block">
+            <div class="heading">
+                <h1 class="heading">MEDICAL BILING SYSTEM</h1>
+            </div>
+            <div class="from">
+                <table cellpadding="25" cellspacing="30">
+                    <form action="get">
+                        <thead >
+                            <th>S.No</th>
+                            <th>Item</th>
+                            <th>Unit Cost (Rs.)</th>
+                            <th>Quantity</th>
+                            <th>Cost (Rs.)</th>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td>1.</td>
+                                <td>Panadol</td>
+                                <td>10</td>
+                                <td><input type="number" onchange="medicine(1)" id="panadol" name="panadol" size="3" value="" maxlength="3"></td>
+                                <td><input type="number" id="sum_panadol" name="total_panadol" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Disprin</td>
+                                <td>15</td>
+                                <td><input type="number" onchange="medicine(2)" id="disprine" name="Disprin" size="3" value="" maxlength="3"></td>
+                                <td><input type="number" id="sum_disprine" name="total_Disprin" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>3.</td>
+                                <td>Flagyl</td>
+                                <td>30</td>
+                                <td><input type="number" onchange="medicine(3)"  name="Flagyl" id="flygel" size="3" value="" maxlength="3"></td>
+                                <td><input type="number" id="sum_flygel" name="total_Flagyl" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total</td>
+                                <td><input type="number" name="Total" id="total" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>GST 15%</td>
+                                <td><input type="number" id="gst" name="total_gst" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Grand Total Rs.</td>
+                                <td><input type="number" id="gd" name="Grand_total" size="3" value="" maxlength="3" disabled></td>
+                            </tr>
+                        </tbody>
+                    </form>
+                </table>
+            </div>
+            <div class="update">
+                <button type="button" onclick="grand_total()"  id="btn"  class="btn">Update Grand Total</button>
+            </div> 
+        </div>
+    </main>
+</body>
+</html>
